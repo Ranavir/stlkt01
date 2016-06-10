@@ -1,0 +1,34 @@
+//create database with name "pg"
+
+//Mandatory Table for payment tracking
+CREATE TABLE online_payment_details
+(
+  slno serial NOT NULL,
+  deposit_mode text,
+  amount numeric(5,2),
+  deposit_status text,
+  request_time timestamp without time zone,
+  created_by text,
+  created_on timestamp without time zone,
+  order_no numeric NOT NULL,
+  application_no text NOT NULL,
+  payment_id text,
+  CONSTRAINT unique_key UNIQUE (application_no, order_no)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE online_payment_details
+  OWNER TO postgres;
+  
+  
+//Sequence for orderId
+
+  CREATE SEQUENCE order_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE order_seq
+  OWNER TO postgres;
